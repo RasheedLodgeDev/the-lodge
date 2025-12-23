@@ -479,92 +479,182 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-4 grid gap-3">
-      <div className="grid gap-3 md:grid-cols-2">
-        <select
-          className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          value={form.areas}
-          onChange={(e) => setForm({ ...form, areas: e.target.value })}
-        >
-          <option>Worcester County</option>
-          <option>MetroWest</option>
-          <option>Greater Boston</option>
-          <option>South Shore</option>
-        </select>
-
-        <input
-          className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          placeholder="Preferred towns (optional)"
-          value={form.towns}
-          onChange={(e) => setForm({ ...form, towns: e.target.value })}
-        />
-      </div>
-
-      <div className="grid gap-3 md:grid-cols-4">
-        <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          placeholder="Min $"
-          value={form.price_min}
-          onChange={(e) => setForm({ ...form, price_min: e.target.value })}
-          inputMode="numeric"
-        />
-        <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          placeholder="Max $"
-          value={form.price_max}
-          onChange={(e) => setForm({ ...form, price_max: e.target.value })}
-          inputMode="numeric"
-        />
-        <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          value={form.beds}
-          onChange={(e) => setForm({ ...form, beds: e.target.value })}
-        >
-          <option value="1">1+ beds</option>
-          <option value="2">2+ beds</option>
-          <option value="3">3+ beds</option>
-          <option value="4">4+ beds</option>
-          <option value="5">5+ beds</option>
-        </select>
-        <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          value={form.baths}
-          onChange={(e) => setForm({ ...form, baths: e.target.value })}
-        >
-          <option value="1">1+ baths</option>
-          <option value="2">2+ baths</option>
-          <option value="3">3+ baths</option>
+    <option>Pre-approved</option>
+          <option>Need a lender</option>
+          <option>Cash</option>
         </select>
       </div>
 
+      {/* Contact fields */}
       <div className="grid gap-3 md:grid-cols-3">
-        <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          value={form.property_type}
-          onChange={(e) => setForm({ ...form, property_type: e.target.value })}
-        >
-          <option>Any</option>
-          <option>Single Family</option>
-          <option>Condo</option>
-          <option>Multi-Family</option>
-          <option>Land</option>
-        </select>
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+          placeholder="Email"
+          type="email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+          placeholder="Phone"
+          type="tel"
+          value={form.phone}
+          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+        />
+      </div>
 
-        <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          value={form.timeline}
-          onChange={(e) => setForm({ ...form, timeline: e.target.value })}
-        >
-          <option>0–3 months</option>
-          <option>3–6 months</option>
-          <option>6–12 months</option>
-          <option>Just researching</option>
-        </select>
+      {/* Honeypot hidden field */}
+      <input
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        value={form.company}
+        onChange={(e) => setForm({ ...form, company: e.target.value })}
+        aria-hidden="true"
+      />
 
-        <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          value={form.financing}
-          onChange={(e) => setForm({ ...form, financing: e.target.value })}
-        >
-          <option>Not sure</option>
-          <option>Pre
+      {err && <p className="text-sm text-red-500">{err}</p>}
+
+      <button
+        disabled={loading}
+        type="submit"
+        className="mt-1 rounded-2xl bg-gradient-to-r from-[#c9a961] to-[#b8934a] px-5 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all disabled:opacity-60"
+      >
+        {loading ? "Sending…" : "See Matches (I'll send listings)"}
+      </button>
+    </form>
+  );
+}
+
+function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) {
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    lead_type: "buyer",
+    message: "",
+    company: "",
+  });
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setErr(null);
+    setLoading(true);
+    try {
+      await submitLead({
+        source: "entry_modal",
+        page_path: "/",
+        ...form,
+      });
+      onSuccess();
+      onClose();
+      window.open(process.env.NEXT_PUBLIC_CALENDAR_URL || "#", "_blank", "noopener,noreferrer");
+    } catch (e: any) {
+      setErr(e.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/50 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm uppercase tracking-widest text-gray-500">The Lodge</p>
+            <h2 className="mt-1 text-2xl font-semibold text-gray-900">Need help with real estate?</h2>
+            <p className="mt-2 text-gray-600">
+              Drop your contact info and pick a time — I'll help you get clear, fast.
+            </p>
+          </div>
+          <button
+            className="rounded-full bg-gray-100 px-3 py-2 text-sm hover:bg-gray-200 transition"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="mt-5">
+          <div className="grid gap-3 md:grid-cols-2">
+            <input
+              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+              placeholder="Name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+            <select
+              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+              value={form.lead_type}
+              onChange={(e) => setForm({ ...form, lead_type: e.target.value })}
+            >
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+              <option value="investor">Investor</option>
+            </select>
+          </div>
+
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            <input
+              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+              placeholder="Email"
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+            <input
+              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+              placeholder="Phone"
+              type="tel"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            />
+          </div>
+
+          <textarea
+            className="mt-3 min-h-[90px] w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
+            placeholder="What are you looking for? (towns, budget, timeline)"
+            value={form.message}
+            onChange={(e) => setForm({ ...form, message: e.target.value })}
+          />
+
+          <input
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            value={form.company}
+            onChange={(e) => setForm({ ...form, company: e.target.value })}
+            aria-hidden="true"
+          />
+
+          {err && <p className="mt-3 text-sm text-red-500">{err}</p>}
+
+          <button
+            disabled={loading}
+            onClick={onSubmit}
+            className="mt-4 w-full rounded-2xl bg-gradient-to-r from-[#c9a961] to-[#b8934a] px-5 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all disabled:opacity-60"
+          >
+            {loading ? "Saving…" : "Save + Choose a time"}
+          </button>
+
+          <p className="mt-3 text-xs text-gray-500 text-center">
+            By submitting, you agree to be contacted about your request.{" "}
+            <a className="underline hover:text-gray-900" href="/privacy">
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
