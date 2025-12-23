@@ -133,27 +133,26 @@ export default function HomePage() {
             </div>
           </nav>
 
-          {/* ✅ Make Search box + Headshot card sit on same row and evenly aligned */}
-          <div className="mt-12 grid gap-10 md:grid-cols-2 md:items-stretch">
-            {/* Left: Search capture card */}
-            <div className="rounded-3xl border border-gray-200 bg-white/85 p-6 backdrop-blur shadow-sm flex flex-col">
-              <div>
-                <h1 className="text-4xl font-semibold leading-tight md:text-5xl text-gray-900">
-                  Find your next home —
-                  <span
-                    className="block bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
-                    }}
-                  >
-                    with a guide who moves fast.
-                  </span>
-                </h1>
+          {/* ✅ Tops aligned, but NO forced equal heights */}
+          <div className="mt-12 grid gap-10 md:grid-cols-2 md:items-start">
+            {/* Left: headline + search card (keeps natural height) */}
+            <div>
+              <h1 className="text-4xl font-semibold leading-tight md:text-5xl text-gray-900">
+                Find your next home —
+                <span
+                  className="block bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                  }}
+                >
+                  with a guide who moves fast.
+                </span>
+              </h1>
 
-                <p className="mt-4 text-lg text-gray-700">{heroTagline}</p>
-              </div>
+              <p className="mt-4 text-lg text-gray-700">{heroTagline}</p>
 
-              <div className="mt-6">
+              {/* Search capture */}
+              <div className="mt-8 rounded-3xl border border-gray-200 bg-white/85 p-5 backdrop-blur shadow-sm">
                 <p className="text-sm uppercase tracking-widest text-gray-500">Search-style matching</p>
                 <p className="mt-1 text-sm text-gray-600">
                   Tell me what you want — I&apos;ll send matching listings and strategy.
@@ -188,31 +187,29 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: Headshot card */}
-            <div className="rounded-3xl border border-gray-200 bg-white/92 p-6 shadow-lg backdrop-blur flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-5">
-                  <div className="h-20 w-20 overflow-hidden rounded-2xl border-2 border-gray-200 bg-gray-50">
-                    <img
-                      src="/headshot.jpg"
-                      alt="Rasheed Lodge headshot"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-xl font-semibold text-gray-900">Rasheed Lodge</p>
-                    <p className="text-sm text-gray-600">
-                      Licensed real estate agent • Serving all of Massachusetts
-                    </p>
-                  </div>
+            {/* Right: headshot card (keeps natural height) */}
+            <div className="rounded-3xl border border-gray-200 bg-white/92 p-6 shadow-lg backdrop-blur">
+              <div className="flex items-center gap-5">
+                <div className="h-20 w-20 overflow-hidden rounded-2xl border-2 border-gray-200 bg-gray-50">
+                  <img
+                    src="/headshot.jpg"
+                    alt="Rasheed Lodge headshot"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
-
-                <p className="mt-5 text-gray-700 leading-relaxed">
-                  I combine a data-driven approach with sharp negotiation and fast communication —
-                  helping buyers, sellers, and investors make confident moves without feeling rushed
-                  or lost.
-                </p>
+                <div>
+                  <p className="text-xl font-semibold text-gray-900">Rasheed Lodge</p>
+                  <p className="text-sm text-gray-600">
+                    Licensed real estate agent • Serving all of Massachusetts
+                  </p>
+                </div>
               </div>
+
+              <p className="mt-5 text-gray-700 leading-relaxed">
+                I combine a data-driven approach with sharp negotiation and fast communication —
+                helping buyers, sellers, and investors make confident moves without feeling rushed
+                or lost.
+              </p>
 
               <div className="mt-5 flex gap-3">
                 <a
@@ -490,7 +487,7 @@ export default function HomePage() {
         </div>
       </footer>
 
-      {/* ✅ Immediate pop-up modal on first visit (restored via useFirstVisitModal) */}
+      {/* Popup Modal */}
       {open && <LeadModal onClose={close} onSuccess={() => setToast("Thanks — I’ll reach out shortly.")} />}
 
       {/* Toast */}
@@ -623,7 +620,6 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form onSubmit={onSubmit} className="mt-4 grid gap-3">
-      {/* ✅ County dropdown + Towns */}
       <div className="grid gap-3 md:grid-cols-2">
         <select
           className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
