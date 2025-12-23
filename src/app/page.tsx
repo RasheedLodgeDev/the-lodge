@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "The Lodge Real Estate";
 const CAL_URL = process.env.NEXT_PUBLIC_CALENDAR_URL || "#";
@@ -450,13 +450,14 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
     name: "",
     email: "",
     phone: "",
-    company: "",
+    company: "", // honeypot
   });
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setErr(null);
     setLoading(true);
+
     try {
       await submitLead({
         source: "search_capture",
@@ -469,14 +470,175 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
         lead_type: "buyer",
         message: `Search request: ${form.areas}${form.towns ? ` | Towns: ${form.towns}` : ""}`,
       });
+
       onSuccess();
       setForm((f) => ({ ...f, name: "", email: "", phone: "" }));
     } catch (e: any) {
-      setErr(e.message || "Something went wrong.");
+      setErr(e?.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
   }
+
+  const goldFrom = "#b98a2e"; // richer gold (less lemon-yellow)
+  const goldTo = "#8a5a12";   // deeper “antique” gold
+
+  return (
+    <form onSubmit={onSubmit} className="mt-4 grid gap-3">
+      {/* Row 1 */}
+      <div className="grid gap-3 md:grid-cols-2">
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          placeholder="Area (e.g., Worcester County, MetroWest)"
+          value={form.areas}
+          onChange={(e) => setForm({ ...form, areas: e.target.value })}
+        />
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          placeholder="Towns (optional)"
+          value={form.towns}
+          onChange={(e) => setForm({ ...form, towns: e.target.value })}
+        />
+      </div>
+
+      {/* Row 2 */}
+      <div className="grid gap-3 md:grid-cols-4">
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          placeholder="Min $"
+          inputMode="numeric"
+          value={form.price_min}
+          onChange={(e) => setForm({ ...form, price_min: e.target.value })}
+        />
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          placeholder="Max $"
+          inputMode="numeric"
+          value={form.price_max}
+          onChange={(e) => setForm({ ...form, price_max: e.target.value })}
+        />
+        <select
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          value={form.beds}
+          onChange={(e) => setForm({ ...form, beds: e.target.value })}
+        >
+          <option value="1">1+ Beds</option>
+          <option value="2">2+ Beds</option>
+          <option value="3">3+ Beds</option>
+          <option value="4">4+ Beds</option>
+          <option value="5">5+ Beds</option>
+        </select>
+        <select
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          value={form.baths}
+          onChange={(e) => setForm({ ...form, baths: e.target.value })}
+        >
+          <option value="1">1+ Baths</option>
+          <option value="2">2+ Baths</option>
+          <option value="3">3+ Baths</option>
+          <option value="4">4+ Baths</option>
+        </select>
+      </div>
+
+      {/* Row 3 */}
+      <div className="grid gap-3 md:grid-cols-3">
+        <select
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          value={form.property_type}
+          onChange={(e) => setForm({ ...form, property_type: e.target.value })}
+        >
+          <option>Any</option>
+          <option>Single-family</option>
+          <option>Condo</option>
+          <option>Multi-family</option>
+          <option>Townhouse</option>
+          <option>Land</option>
+        </select>
+
+        <select
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          value={form.timeline}
+          onChange={(e) => setForm({ ...form, timeline: e.target.value })}
+        >
+          <option>0–3 months</option>
+          <option>3–6 months</option>
+          <option>6–12 months</option>
+          <option>Just browsing</option>
+        </select>
+
+        <select
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          value={form.financing}
+          onChange={(e) => setForm({ ...form, financing: e.target.value })}
+        >
+          <option>Not sure</option>
+          <option>Pre-approved</option>
+          <option>Need a lender</option>
+          <option>Cash</option>
+        </select>
+      </div>
+
+      {/* Contact */}
+      <div className="grid gap-3 md:grid-cols-3">
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          placeholder="Email"
+          type="email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+        <input
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          style={{ outlineColor: goldFrom }}
+          placeholder="Phone"
+          type="tel"
+          value={form.phone}
+          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+        />
+      </div>
+
+      {/* Honeypot */}
+      <input
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        value={form.company}
+        onChange={(e) => setForm({ ...form, company: e.target.value })}
+        aria-hidden="true"
+      />
+
+      {err && <p className="text-sm text-red-600">{err}</p>}
+
+      <button
+        disabled={loading}
+        type="submit"
+        className="mt-1 rounded-2xl px-5 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all disabled:opacity-60"
+        style={{
+          backgroundImage: `linear-gradient(90deg, ${goldFrom}, ${goldTo})`,
+        }}
+      >
+        {loading ? "Sending…" : "See Matches (I'll send listings)"}
+      </button>
+    </form>
+  );
+}
 
   return (
     <option>Pre-approved</option>
