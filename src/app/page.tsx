@@ -50,20 +50,31 @@ export default function HomePage() {
     []
   );
 
+  // Reference the uploaded building image
+  const heroBg = "/maxim-shklyaev-tFSirJIjl34-unsplash.jpg";
+
   return (
     <main className="min-h-screen bg-[#070708] text-white">
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section 
+        className="relative overflow-hidden"
+        style={{
+          backgroundImage: `url('${heroBg}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <div className="absolute inset-0 opacity-80">
-          {/* “Lodge luxury” vibe: dark gradient + warm glow */}
+          {/* Dark overlay */}
           <div className="h-full w-full bg-gradient-to-b from-[#0b0b0d] via-[#070708] to-[#050506]" />
-          <div className="absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(214,170,90,0.22),transparent_60%)] blur-2xl" />
+          {/* Gold sheen overlay */}
+          <div className="h-full w-full bg-gradient-to-r from-[#bfa76f]/60 to-[#ffd700]/80" />
         </div>
 
         <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-10">
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-[#d6aa5a] to-[#7a5b28] shadow-[0_0_30px_rgba(214,170,90,0.22)]" />
+              <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-[#bfa76f] to-[#ffd700] shadow-[0_0_30px_rgba(214,170,90,0.22)]" />
               <div>
                 <p className="text-sm uppercase tracking-[0.22em] text-white/70">The Lodge</p>
                 <p className="text-base font-semibold">{SITE_NAME}</p>
@@ -95,17 +106,19 @@ export default function HomePage() {
             <div>
               <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
                 Find your next home —
-                <span className="block text-[#d6aa5a]">with a guide who moves fast.</span>
+                <span className="block bg-gradient-to-r from-[#bfa76f] to-[#ffd700] bg-clip-text text-transparent">
+                  with a guide who moves fast.
+                </span>
               </h1>
               <p className="mt-4 text-lg text-white/75">{heroTagline}</p>
 
-              {/* “Zillow-style” lead search */}
+              {/* "Zillow-style" lead search */}
               <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur">
                 <p className="text-sm uppercase tracking-widest text-white/60">Search-style matching</p>
                 <p className="mt-1 text-sm text-white/70">
-                  Tell me what you want — I’ll send matching listings and strategy.
+                  Tell me what you want — I'll send matching listings and strategy.
                 </p>
-                <SearchCapture onSuccess={() => setToast("Got it — I’ll follow up with matches shortly.")} />
+                <SearchCapture onSuccess={() => setToast("Got it — I'll follow up with matches shortly.")} />
               </div>
 
               <div className="mt-5 flex flex-wrap gap-3">
@@ -113,7 +126,7 @@ export default function HomePage() {
                   href={CAL_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full bg-[#d6aa5a] px-5 py-3 text-sm font-semibold text-black hover:opacity-90"
+                  className="rounded-full bg-gradient-to-r from-[#bfa76f] to-[#ffd700] px-5 py-3 text-sm font-semibold text-black hover:opacity-90"
                 >
                   Book a consult
                 </a>
@@ -205,7 +218,7 @@ export default function HomePage() {
       {open && (
         <LeadModal
           onClose={close}
-          onSuccess={() => setToast("Thanks — I’ll reach out shortly.")}
+          onSuccess={() => setToast("Thanks — I'll reach out shortly.")}
         />
       )}
 
@@ -234,7 +247,9 @@ function InfoCard({ title, body, anchor }: { title: string; body: string; anchor
       <p className="text-sm uppercase tracking-widest text-white/60">The Lodge</p>
       <h3 className="mt-2 text-xl font-semibold">{title}</h3>
       <p className="mt-2 text-white/70">{body}</p>
-      <p className="mt-4 text-sm font-semibold text-[#d6aa5a]">Explore →</p>
+      <p className="mt-4 text-sm font-semibold bg-gradient-to-r from-[#bfa76f] to-[#ffd700] bg-clip-text text-transparent">
+        Explore →
+      </p>
     </a>
   );
 }
@@ -415,9 +430,9 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
 
       <button
         disabled={loading}
-        className="mt-1 rounded-2xl bg-[#d6aa5a] px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:opacity-60"
+        className="mt-1 rounded-2xl bg-gradient-to-r from-[#bfa76f] to-[#ffd700] px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:opacity-60"
       >
-        {loading ? "Sending…" : "See Matches (I’ll send listings)"}
+        {loading ? "Sending…" : "See Matches (I'll send listings)"}
       </button>
     </form>
   );
@@ -463,7 +478,7 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
             <p className="text-sm uppercase tracking-widest text-white/60">The Lodge</p>
             <h2 className="mt-1 text-2xl font-semibold">Need help with real estate?</h2>
             <p className="mt-2 text-white/70">
-              Drop your contact info and pick a time — I’ll help you get clear, fast.
+              Drop your contact info and pick a time — I'll help you get clear, fast.
             </p>
           </div>
           <button
@@ -529,7 +544,7 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
 
           <button
             disabled={loading}
-            className="rounded-2xl bg-[#d6aa5a] px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:opacity-60"
+            className="rounded-2xl bg-gradient-to-r from-[#bfa76f] to-[#ffd700] px-5 py-3 text-sm font-semibold text-black hover:opacity-90 disabled:opacity-60"
           >
             {loading ? "Saving…" : "Save + Choose a time"}
           </button>
