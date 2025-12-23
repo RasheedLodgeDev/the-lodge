@@ -24,6 +24,23 @@ async function submitLead(payload: LeadPayload) {
   return data;
 }
 
+const MA_COUNTIES = [
+  "Barnstable",
+  "Berkshire",
+  "Bristol",
+  "Dukes",
+  "Essex",
+  "Franklin",
+  "Hampden",
+  "Hampshire",
+  "Middlesex",
+  "Nantucket",
+  "Norfolk",
+  "Plymouth",
+  "Suffolk",
+  "Worcester",
+] as const;
+
 function useFirstVisitModal() {
   const key = "lodge_seen_modal_v1";
   const [open, setOpen] = useState(false);
@@ -50,8 +67,7 @@ export default function HomePage() {
   const [toast, setToast] = useState<string | null>(null);
 
   const heroTagline = useMemo(
-    () =>
-      "Luxury-level guidance for Worcester County, MetroWest, Greater Boston, and the South Shore.",
+    () => "Luxury-level guidance across Massachusetts — from Greater Boston to the Cape and beyond.",
     []
   );
 
@@ -91,9 +107,7 @@ export default function HomePage() {
                 }}
               />
               <div>
-                <p className="text-sm uppercase tracking-[0.22em] text-gray-600">
-                  The Lodge
-                </p>
+                <p className="text-sm uppercase tracking-[0.22em] text-gray-600">The Lodge</p>
                 <p className="text-base font-semibold text-gray-900">{SITE_NAME}</p>
               </div>
             </div>
@@ -105,10 +119,7 @@ export default function HomePage() {
               <a className="text-sm text-gray-700 hover:text-gray-900 transition" href="#sellers">
                 Sell
               </a>
-              <a
-                className="text-sm text-gray-700 hover:text-gray-900 transition"
-                href="#investors"
-              >
+              <a className="text-sm text-gray-700 hover:text-gray-900 transition" href="#investors">
                 Invest
               </a>
               <a
@@ -122,27 +133,28 @@ export default function HomePage() {
             </div>
           </nav>
 
-          <div className="mt-12 grid gap-10 md:grid-cols-2 md:items-center">
-            <div>
-              <h1 className="text-4xl font-semibold leading-tight md:text-5xl text-gray-900">
-                Find your next home —
-                <span
-                  className="block bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
-                  }}
-                >
-                  with a guide who moves fast.
-                </span>
-              </h1>
+          {/* ✅ Make Search box + Headshot card sit on same row and evenly aligned */}
+          <div className="mt-12 grid gap-10 md:grid-cols-2 md:items-stretch">
+            {/* Left: Search capture card */}
+            <div className="rounded-3xl border border-gray-200 bg-white/85 p-6 backdrop-blur shadow-sm flex flex-col">
+              <div>
+                <h1 className="text-4xl font-semibold leading-tight md:text-5xl text-gray-900">
+                  Find your next home —
+                  <span
+                    className="block bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                    }}
+                  >
+                    with a guide who moves fast.
+                  </span>
+                </h1>
 
-              <p className="mt-4 text-lg text-gray-700">{heroTagline}</p>
+                <p className="mt-4 text-lg text-gray-700">{heroTagline}</p>
+              </div>
 
-              {/* Search capture */}
-              <div className="mt-8 rounded-3xl border border-gray-200 bg-white/85 p-5 backdrop-blur shadow-sm">
-                <p className="text-sm uppercase tracking-widest text-gray-500">
-                  Search-style matching
-                </p>
+              <div className="mt-6">
+                <p className="text-sm uppercase tracking-widest text-gray-500">Search-style matching</p>
                 <p className="mt-1 text-sm text-gray-600">
                   Tell me what you want — I&apos;ll send matching listings and strategy.
                 </p>
@@ -176,29 +188,31 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Headshot card */}
-            <div className="rounded-3xl border border-gray-200 bg-white/92 p-6 shadow-lg backdrop-blur">
-              <div className="flex items-center gap-5">
-                <div className="h-20 w-20 overflow-hidden rounded-2xl border-2 border-gray-200 bg-gray-50">
-                  <img
-                    src="/headshot.jpg"
-                    alt="Rasheed Lodge headshot"
-                    className="h-full w-full object-cover"
-                  />
+            {/* Right: Headshot card */}
+            <div className="rounded-3xl border border-gray-200 bg-white/92 p-6 shadow-lg backdrop-blur flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-5">
+                  <div className="h-20 w-20 overflow-hidden rounded-2xl border-2 border-gray-200 bg-gray-50">
+                    <img
+                      src="/headshot.jpg"
+                      alt="Rasheed Lodge headshot"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xl font-semibold text-gray-900">Rasheed Lodge</p>
+                    <p className="text-sm text-gray-600">
+                      Licensed real estate agent • Serving all of Massachusetts
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xl font-semibold text-gray-900">Rasheed Lodge</p>
-                  <p className="text-sm text-gray-600">
-                    Licensed real estate agent • Central MA + Greater Boston
-                  </p>
-                </div>
-              </div>
 
-              <p className="mt-5 text-gray-700 leading-relaxed">
-                I combine a data-driven approach with sharp negotiation and fast communication —
-                helping buyers, sellers, and investors make confident moves without feeling rushed
-                or lost.
-              </p>
+                <p className="mt-5 text-gray-700 leading-relaxed">
+                  I combine a data-driven approach with sharp negotiation and fast communication —
+                  helping buyers, sellers, and investors make confident moves without feeling rushed
+                  or lost.
+                </p>
+              </div>
 
               <div className="mt-5 flex gap-3">
                 <a
@@ -265,7 +279,10 @@ export default function HomePage() {
               </p>
 
               <div className="space-y-4">
-                <FeatureLine title="Neighborhood expertise" body="Worcester County, MetroWest, Greater Boston, South Shore." />
+                <FeatureLine
+                  title="Neighborhood expertise"
+                  body="Worcester County, MetroWest, Greater Boston, South Shore — and beyond."
+                />
                 <FeatureLine title="Sharp offer strategy" body="Data-driven pricing + negotiation that wins." />
                 <FeatureLine title="Fast, clear communication" body="Quick responses when it matters most." />
               </div>
@@ -303,17 +320,41 @@ export default function HomePage() {
             <div className="order-2 md:order-1 rounded-3xl bg-white p-8 border border-gray-200 shadow-sm">
               <p className="text-sm uppercase tracking-widest text-gray-500 mb-4">Seller advantages</p>
               <div className="space-y-6">
-                <StepLine n="✓" title="Market-tested pricing" body="Comp analysis + insights to price competitively without leaving money behind." />
-                <StepLine n="✓" title="Strategic staging & prep" body="High-impact improvements that attract serious offers." />
-                <StepLine n="✓" title="Professional marketing" body="Strong presentation, digital reach, and broad exposure." />
-                <StepLine n="✓" title="Skilled negotiation" body="Handle multiple offers, contingencies, and closing obstacles." />
+                <StepLine
+                  n="✓"
+                  title="Market-tested pricing"
+                  body="Comp analysis + insights to price competitively without leaving money behind."
+                />
+                <StepLine
+                  n="✓"
+                  title="Strategic staging & prep"
+                  body="High-impact improvements that attract serious offers."
+                />
+                <StepLine
+                  n="✓"
+                  title="Professional marketing"
+                  body="Strong presentation, digital reach, and broad exposure."
+                />
+                <StepLine
+                  n="✓"
+                  title="Skilled negotiation"
+                  body="Handle multiple offers, contingencies, and closing obstacles."
+                />
               </div>
 
               <ul className="mt-8 grid gap-3 md:grid-cols-2 text-sm text-gray-700">
-                <li className="flex gap-2"><span className="font-semibold">•</span> Prep checklist to boost offer quality</li>
-                <li className="flex gap-2"><span className="font-semibold">•</span> Offer review focused on net + certainty</li>
-                <li className="flex gap-2"><span className="font-semibold">•</span> Showings managed to protect your time</li>
-                <li className="flex gap-2"><span className="font-semibold">•</span> Timeline control and clean communication</li>
+                <li className="flex gap-2">
+                  <span className="font-semibold">•</span> Prep checklist to boost offer quality
+                </li>
+                <li className="flex gap-2">
+                  <span className="font-semibold">•</span> Offer review focused on net + certainty
+                </li>
+                <li className="flex gap-2">
+                  <span className="font-semibold">•</span> Showings managed to protect your time
+                </li>
+                <li className="flex gap-2">
+                  <span className="font-semibold">•</span> Timeline control and clean communication
+                </li>
               </ul>
             </div>
 
@@ -379,7 +420,8 @@ export default function HomePage() {
               investors move quickly on deals that make financial sense.
             </p>
             <p className="mt-3 text-sm text-gray-600 max-w-2xl mx-auto">
-              We’ll quickly sort opportunities into: “pursue,” “negotiate,” or “pass” — with clear numbers behind it.
+              We’ll quickly sort opportunities into: “pursue,” “negotiate,” or “pass” — with clear
+              numbers behind it.
             </p>
           </div>
 
@@ -390,9 +432,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 rounded-3xl bg-gradient-to-br from-gray-50 to-gray-100 p-8 border border-gray-200 text-center">
-            <p className="text-lg font-semibold text-gray-900 mb-2">
-              Ready to find your next investment?
-            </p>
+            <p className="text-lg font-semibold text-gray-900 mb-2">Ready to find your next investment?</p>
             <p className="text-gray-600 mb-6">Let’s discuss your portfolio goals and market opportunities.</p>
             <a
               href={CAL_URL}
@@ -422,9 +462,7 @@ export default function HomePage() {
               />
               <div>
                 <p className="text-sm font-semibold text-gray-900">{SITE_NAME}</p>
-                <p className="text-xs text-gray-500">
-                  © {new Date().getFullYear()} All rights reserved
-                </p>
+                <p className="text-xs text-gray-500">© {new Date().getFullYear()} All rights reserved</p>
               </div>
             </div>
             <div className="flex gap-6 text-sm">
@@ -452,10 +490,8 @@ export default function HomePage() {
         </div>
       </footer>
 
-      {/* Popup Modal */}
-      {open && (
-        <LeadModal onClose={close} onSuccess={() => setToast("Thanks — I’ll reach out shortly.")} />
-      )}
+      {/* ✅ Immediate pop-up modal on first visit (restored via useFirstVisitModal) */}
+      {open && <LeadModal onClose={close} onSuccess={() => setToast("Thanks — I’ll reach out shortly.")} />}
 
       {/* Toast */}
       {toast && (
@@ -543,7 +579,7 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
   const [err, setErr] = useState<string | null>(null);
 
   const [form, setForm] = useState({
-    areas: "Worcester County",
+    county: "Worcester",
     towns: "",
     price_min: "",
     price_max: "",
@@ -573,7 +609,7 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
         beds: form.beds ? Number(form.beds) : null,
         baths: form.baths ? Number(form.baths) : null,
         lead_type: "buyer",
-        message: `Search request: ${form.areas}${form.towns ? ` | Towns: ${form.towns}` : ""}`,
+        message: `Search request: ${form.county} County${form.towns ? ` | Towns: ${form.towns}` : ""}`,
       });
 
       onSuccess();
@@ -587,14 +623,21 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form onSubmit={onSubmit} className="mt-4 grid gap-3">
+      {/* ✅ County dropdown + Towns */}
       <div className="grid gap-3 md:grid-cols-2">
-        <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+        <select
+          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
           style={{ outlineColor: GOLD_FROM }}
-          placeholder="Area (e.g., Worcester County, MetroWest)"
-          value={form.areas}
-          onChange={(e) => setForm({ ...form, areas: e.target.value })}
-        />
+          value={form.county}
+          onChange={(e) => setForm({ ...form, county: e.target.value })}
+        >
+          {MA_COUNTIES.map((c) => (
+            <option key={c} value={c}>
+              {c} County
+            </option>
+          ))}
+        </select>
+
         <input
           className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
           style={{ outlineColor: GOLD_FROM }}
@@ -793,7 +836,6 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
           </button>
         </div>
 
-        {/* Proper form wrapper */}
         <form className="mt-5" onSubmit={onSubmit}>
           <div className="grid gap-3 md:grid-cols-2">
             <input
