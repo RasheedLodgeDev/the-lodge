@@ -119,7 +119,8 @@ export default function HomePage() {
                 <SearchCapture onSuccess={() => setToast("Got it — I'll follow up with matches shortly.")} />
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-3">
+              <form className="mt-5" onSubmit={onSubmit}>
+
                 <a
                   href={CAL_URL}
                   target="_blank"
@@ -135,8 +136,9 @@ export default function HomePage() {
                   className="rounded-full border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition"
                 >
                   Read Zillow reviews
-                </a>
-              </div>
+                  </a>
+                </div>
+              </form>
             </div>
 
             {/* Headshot card with lighter styling */}
@@ -640,60 +642,6 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
   );
 }
 
-  return (
-    <option>Pre-approved</option>
-          <option>Need a lender</option>
-          <option>Cash</option>
-        </select>
-      </div>
-
-      {/* Contact fields */}
-      <div className="grid gap-3 md:grid-cols-3">
-        <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
-        <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          placeholder="Email"
-          type="email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-[#c9a961] focus:outline-none focus:ring-1 focus:ring-[#c9a961]"
-          placeholder="Phone"
-          type="tel"
-          value={form.phone}
-          onChange={(e) => setForm({ ...form, phone: e.target.value })}
-        />
-      </div>
-
-      {/* Honeypot hidden field */}
-      <input
-        className="hidden"
-        tabIndex={-1}
-        autoComplete="off"
-        value={form.company}
-        onChange={(e) => setForm({ ...form, company: e.target.value })}
-        aria-hidden="true"
-      />
-
-      {err && <p className="text-sm text-red-500">{err}</p>}
-
-      <button
-        disabled={loading}
-        type="submit"
-        className="mt-1 rounded-2xl bg-gradient-to-r from-[#c9a961] to-[#b8934a] px-5 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all disabled:opacity-60"
-      >
-        {loading ? "Sending…" : "See Matches (I'll send listings)"}
-      </button>
-    </form>
-  );
-}
-
 function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -706,7 +654,8 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
     company: "",
   });
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent) {
+    
     e.preventDefault();
     setErr(null);
     setLoading(true);
