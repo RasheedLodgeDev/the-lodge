@@ -6,7 +6,7 @@ const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "The Lodge Real Estate";
 const CAL_URL = process.env.NEXT_PUBLIC_CALENDAR_URL || "#";
 const ZILLOW_URL = process.env.NEXT_PUBLIC_ZILLOW_REVIEWS_URL || "#";
 
-// Richer, less-yellow gold with a sheen highlight
+// Richer, less yellow gold with a sheen highlight
 const GOLD_FROM = "#B8861B";
 const GOLD_MID = "#E0C26E";
 const GOLD_TO = "#7A4E12";
@@ -16,7 +16,7 @@ type LeadPayload = Record<string, any>;
 async function submitLead(payload: LeadPayload) {
   const res = await fetch("/api/leads", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content Type": "application/json" },
     body: JSON.stringify(payload),
   });
   const data = await res.json().catch(() => ({}));
@@ -67,17 +67,17 @@ export default function HomePage() {
   const [toast, setToast] = useState<string | null>(null);
 
   const heroTagline = useMemo(
-    () => "Luxury-level guidance across Massachusetts — from Greater Boston to the Cape and beyond.",
+    () => "Luxury level guidance across Massachusetts — from Greater Boston to the Cape and beyond.",
     []
   );
 
-  const heroBg = "/maxim-shklyaev-tFSirJIjl34-unsplash.jpg";
+  const heroBg = "/maxim shklyaev tFSirJIjl34 unsplash.jpg";
 
   return (
-    <main className="min-h-screen bg-[#fafaf8] text-gray-900">
+    <main className="min h screen bg [#fafaf8] text gray 900">
       {/* HERO */}
       <section
-        className="relative overflow-hidden"
+        className="relative overflow hidden"
         style={{
           backgroundImage: `url('${heroBg}')`,
           backgroundSize: "cover",
@@ -85,45 +85,45 @@ export default function HomePage() {
         }}
       >
         {/* Brighter, warmer overlay (more welcoming) */}
-        <div className="absolute inset-0">
+        <div className="absolute inset 0">
           {/* warm/bright wash */}
-          <div className="h-full w-full bg-gradient-to-b from-[#fffaf0]/85 via-white/78 to-[#fafaf8]/90" />
+          <div className="h full w full bg gradient to b from [#fffaf0]/85 via white/78 to [#fafaf8]/90" />
           {/* subtle gold sheen */}
           <div
-            className="absolute inset-0"
+            className="absolute inset 0"
             style={{
-              backgroundImage: `linear-gradient(135deg, ${GOLD_FROM}22, transparent 55%, ${GOLD_TO}14)`,
+              backgroundImage: `linear gradient(135deg, ${GOLD_FROM}22, transparent 55%, ${GOLD_TO}14)`,
             }}
           />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-10">
-          <nav className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+        <div className="relative mx auto max w 6xl px 6 pt 14 pb 10">
+          <nav className="flex items center justify between">
+            <div className="flex items center gap 3">
               <div
-                className="h-10 w-10 rounded-2xl shadow-lg"
+                className="h 10 w 10 rounded 2xl shadow lg"
                 style={{
-                  backgroundImage: `linear-gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                  backgroundImage: `linear gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                 }}
               />
               <div>
-                <p className="text-sm uppercase tracking-[0.22em] text-gray-600">The Lodge</p>
-                <p className="text-base font-semibold text-gray-900">{SITE_NAME}</p>
+                <p className="text sm uppercase tracking [0.22em] text gray 600">The Lodge</p>
+                <p className="text base font semibold text gray 900">{SITE_NAME}</p>
               </div>
             </div>
 
-            <div className="hidden md:flex items-center gap-3">
-              <a className="text-sm text-gray-700 hover:text-gray-900 transition" href="#buyers">
+            <div className="hidden md:flex items center gap 3">
+              <a className="text sm text gray 700 hover:text gray 900 transition" href="#buyers">
                 Buy
               </a>
-              <a className="text-sm text-gray-700 hover:text-gray-900 transition" href="#sellers">
+              <a className="text sm text gray 700 hover:text gray 900 transition" href="#sellers">
                 Sell
               </a>
-              <a className="text-sm text-gray-700 hover:text-gray-900 transition" href="#investors">
+              <a className="text sm text gray 700 hover:text gray 900 transition" href="#investors">
                 Invest
               </a>
               <a
-                className="ml-2 rounded-full bg-gray-900/5 px-4 py-2 text-sm hover:bg-gray-900/10 transition"
+                className="ml 2 rounded full bg gray 900/5 px 4 py 2 text sm hover:bg gray 900/10 transition"
                 href={CAL_URL}
                 target="_blank"
                 rel="noreferrer"
@@ -134,27 +134,27 @@ export default function HomePage() {
           </nav>
 
           {/* ✅ Tops aligned, but NO forced equal heights */}
-          <div className="mt-12 grid gap-10 md:grid-cols-2 md:items-start">
+          <div className="mt 12 grid gap 10 md:grid cols 2 md:items start">
             {/* Left: headline + search card (keeps natural height) */}
             <div>
-              <h1 className="text-4xl font-semibold leading-tight md:text-5xl text-gray-900">
+              <h1 className="text 4xl font semibold leading tight md:text 5xl text gray 900">
                 Find your next home —
                 <span
-                  className="block bg-clip-text text-transparent"
+                  className="block bg clip text text transparent"
                   style={{
-                    backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                    backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                   }}
                 >
                   with a guide who moves fast.
                 </span>
               </h1>
 
-              <p className="mt-4 text-lg text-gray-700">{heroTagline}</p>
+              <p className="mt 4 text lg text gray 700">{heroTagline}</p>
 
               {/* Search capture */}
-              <div className="mt-8 rounded-3xl border border-gray-200 bg-white/85 p-5 backdrop-blur shadow-sm">
-                <p className="text-sm uppercase tracking-widest text-gray-500">Search-style matching</p>
-                <p className="mt-1 text-sm text-gray-600">
+              <div className="mt 8 rounded 3xl border border gray 200 bg white/85 p 5 backdrop blur shadow sm">
+                <p className="text sm uppercase tracking widest text gray 500">Search style matching</p>
+                <p className="mt 1 text sm text gray 600">
                   Tell me what you want — I&apos;ll send matching listings and strategy.
                 </p>
                 <SearchCapture
@@ -163,14 +163,14 @@ export default function HomePage() {
               </div>
 
               {/* CTA Buttons (NOT a form) */}
-              <div className="mt-5 flex flex-wrap gap-3">
+              <div className="mt 5 flex flex wrap gap 3">
                 <a
                   href={CAL_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full px-5 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+                  className="rounded full px 5 py 3 text sm font semibold text white hover:shadow lg transition all"
                   style={{
-                    backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                    backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                   }}
                 >
                   Book a consult
@@ -180,7 +180,7 @@ export default function HomePage() {
                   href={ZILLOW_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition"
+                  className="rounded full border border gray 300 bg white px 5 py 3 text sm font semibold text gray 900 hover:bg gray 50 transition"
                 >
                   Read Zillow reviews
                 </a>
@@ -188,38 +188,38 @@ export default function HomePage() {
             </div>
 
             {/* Right: headshot card (keeps natural height) */}
-            <div className="rounded-3xl border border-gray-200 bg-white/92 p-6 shadow-lg backdrop-blur">
-              <div className="flex items-center gap-5">
-                <div className="h-20 w-20 overflow-hidden rounded-2xl border-2 border-gray-200 bg-gray-50">
+            <div className="rounded 3xl border border gray 200 bg white/92 p 6 shadow lg backdrop blur">
+              <div className="flex items center gap 5">
+                <div className="h 20 w 20 overflow hidden rounded 2xl border 2 border gray 200 bg gray 50">
                   <img
                     src="/headshot.jpg"
                     alt="Rasheed Lodge headshot"
-                    className="h-full w-full object-cover"
+                    className="h full w full object cover"
                   />
                 </div>
                 <div>
-                  <p className="text-xl font-semibold text-gray-900">Rasheed Lodge</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text xl font semibold text gray 900">Rasheed Lodge</p>
+                  <p className="text sm text gray 600">
                     Licensed real estate agent • Serving all of Massachusetts
                   </p>
                 </div>
               </div>
 
-              <p className="mt-5 text-gray-700 leading-relaxed">
-                I combine a data-driven approach with sharp negotiation and fast communication —
+              <p className="mt 5 text gray 700 leading relaxed">
+                I combine a data driven approach with sharp negotiation and fast communication —
                 helping buyers, sellers, and investors make confident moves without feeling rushed
                 or lost.
               </p>
 
-              <div className="mt-5 flex gap-3">
+              <div className="mt 5 flex gap 3">
                 <a
-                  className="rounded-full bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200 transition text-gray-900"
+                  className="rounded full bg gray 100 px 4 py 2 text sm hover:bg gray 200 transition text gray 900"
                   href="#about"
                 >
                   About
                 </a>
                 <button
-                  className="rounded-full bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200 transition text-gray-900"
+                  className="rounded full bg gray 100 px 4 py 2 text sm hover:bg gray 200 transition text gray 900"
                   onClick={() => setOpen(true)}
                 >
                   Get help now
@@ -229,7 +229,7 @@ export default function HomePage() {
           </div>
 
           {/* Quick info cards */}
-          <div id="about" className="mt-14 grid gap-6 md:grid-cols-3">
+          <div id="about" className="mt 14 grid gap 6 md:grid cols 3">
             <InfoCard
               title="Buyer Guidance"
               body="Strategy, neighborhoods, and sharp offers — with calm communication."
@@ -242,7 +242,7 @@ export default function HomePage() {
             />
             <InfoCard
               title="Investor Focus"
-              body="Buy-box clarity, deal triage, and underwriting support."
+              body="Buy box clarity, deal triage, and underwriting support."
               anchor="investors"
             />
           </div>
@@ -250,37 +250,37 @@ export default function HomePage() {
       </section>
 
       {/* BUYERS */}
-      <section id="buyers" className="py-20 bg-white">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-12 md:grid-cols-2 md:items-center">
+      <section id="buyers" className="py 20 bg white">
+        <div className="mx auto max w 6xl px 6">
+          <div className="grid gap 12 md:grid cols 2 md:items center">
             <div>
-              <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">For Buyers</p>
-              <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+              <p className="text sm uppercase tracking widest text gray 500 mb 3">For Buyers</p>
+              <h2 className="text 3xl font semibold text gray 900 mb 6">
                 Find the right home with{" "}
                 <span
-                  className="bg-clip-text text-transparent"
+                  className="bg clip text text transparent"
                   style={{
-                    backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                    backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                   }}
                 >
                   confidence and clarity
                 </span>
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <p className="text gray 700 leading relaxed mb 4">
                 Buying a home shouldn&apos;t feel overwhelming. I help you understand your options,
                 navigate competitive markets, and make strong offers that get accepted — while keeping
                 your stress low and your timeline realistic.
               </p>
-              <p className="text-sm text-gray-600 mb-6">
+              <p className="text sm text gray 600 mb 6">
                 You’ll always know what we’re doing, why we’re doing it, and what the next step is.
               </p>
 
-              <div className="space-y-4">
+              <div className="space y 4">
                 <FeatureLine
                   title="Neighborhood expertise"
                   body="Worcester County, MetroWest, Greater Boston, South Shore — and beyond."
                 />
-                <FeatureLine title="Sharp offer strategy" body="Data-driven pricing + negotiation that wins." />
+                <FeatureLine title="Sharp offer strategy" body="Data driven pricing + negotiation that wins." />
                 <FeatureLine title="Fast, clear communication" body="Quick responses when it matters most." />
               </div>
 
@@ -288,19 +288,19 @@ export default function HomePage() {
                 href={CAL_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 inline-block rounded-full px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+                className="mt 8 inline block rounded full px 6 py 3 text sm font semibold text white hover:shadow lg transition all"
                 style={{
-                  backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                  backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                 }}
               >
                 Start your search
               </a>
             </div>
 
-            <div className="rounded-3xl bg-gradient-to-br from-gray-50 to-gray-100 p-8 border border-gray-200">
-              <p className="text-sm uppercase tracking-widest text-gray-500 mb-4">How it works</p>
-              <div className="space-y-6">
-                <StepLine n="1" title="Discovery call" body="Must-haves, budget, timeline, and preferred locations." />
+            <div className="rounded 3xl bg gradient to br from gray 50 to gray 100 p 8 border border gray 200">
+              <p className="text sm uppercase tracking widest text gray 500 mb 4">How it works</p>
+              <div className="space y 6">
+                <StepLine n="1" title="Discovery call" body="Must haves, budget, timeline, and preferred locations." />
                 <StepLine n="2" title="Personalized search" body="Curated listings + showings that match your criteria." />
                 <StepLine n="3" title="Strategic offers" body="Competitive offers with strong negotiation backing." />
                 <StepLine n="4" title="Smooth closing" body="Inspections, appraisal, paperwork — kept on track." />
@@ -311,21 +311,21 @@ export default function HomePage() {
       </section>
 
       {/* SELLERS */}
-      <section id="sellers" className="py-20 bg-[#fafaf8]">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-12 md:grid-cols-2 md:items-center">
-            <div className="order-2 md:order-1 rounded-3xl bg-white p-8 border border-gray-200 shadow-sm">
-              <p className="text-sm uppercase tracking-widest text-gray-500 mb-4">Seller advantages</p>
-              <div className="space-y-6">
+      <section id="sellers" className="py 20 bg [#fafaf8]">
+        <div className="mx auto max w 6xl px 6">
+          <div className="grid gap 12 md:grid cols 2 md:items center">
+            <div className="order 2 md:order 1 rounded 3xl bg white p 8 border border gray 200 shadow sm">
+              <p className="text sm uppercase tracking widest text gray 500 mb 4">Seller advantages</p>
+              <div className="space y 6">
                 <StepLine
                   n="✓"
-                  title="Market-tested pricing"
+                  title="Market tested pricing"
                   body="Comp analysis + insights to price competitively without leaving money behind."
                 />
                 <StepLine
                   n="✓"
                   title="Strategic staging & prep"
-                  body="High-impact improvements that attract serious offers."
+                  body="High impact improvements that attract serious offers."
                 />
                 <StepLine
                   n="✓"
@@ -339,42 +339,42 @@ export default function HomePage() {
                 />
               </div>
 
-              <ul className="mt-8 grid gap-3 md:grid-cols-2 text-sm text-gray-700">
-                <li className="flex gap-2">
-                  <span className="font-semibold">•</span> Prep checklist to boost offer quality
+              <ul className="mt 8 grid gap 3 md:grid cols 2 text sm text gray 700">
+                <li className="flex gap 2">
+                  <span className="font semibold">•</span> Prep checklist to boost offer quality
                 </li>
-                <li className="flex gap-2">
-                  <span className="font-semibold">•</span> Offer review focused on net + certainty
+                <li className="flex gap 2">
+                  <span className="font semibold">•</span> Offer review focused on net + certainty
                 </li>
-                <li className="flex gap-2">
-                  <span className="font-semibold">•</span> Showings managed to protect your time
+                <li className="flex gap 2">
+                  <span className="font semibold">•</span> Showings managed to protect your time
                 </li>
-                <li className="flex gap-2">
-                  <span className="font-semibold">•</span> Timeline control and clean communication
+                <li className="flex gap 2">
+                  <span className="font semibold">•</span> Timeline control and clean communication
                 </li>
               </ul>
             </div>
 
-            <div className="order-1 md:order-2">
-              <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">For Sellers</p>
-              <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+            <div className="order 1 md:order 2">
+              <p className="text sm uppercase tracking widest text gray 500 mb 3">For Sellers</p>
+              <h2 className="text 3xl font semibold text gray 900 mb 6">
                 Get{" "}
                 <span
-                  className="bg-clip-text text-transparent"
+                  className="bg clip text text transparent"
                   style={{
-                    backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                    backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                   }}
                 >
                   top dollar
                 </span>{" "}
                 without the stress
               </h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
+              <p className="text gray 700 leading relaxed mb 6">
                 Selling your home is more than listing it online. It’s about positioning your
                 property to attract the right buyers, managing showings efficiently, and negotiating
                 offers that close on time and on terms that work for you.
               </p>
-              <p className="text-gray-700 leading-relaxed mb-8">
+              <p className="text gray 700 leading relaxed mb 8">
                 My process is strategic from day one: pricing, prep, marketing execution, and clear
                 offer guidance. The goal is simple — sell confidently, smoothly, and for the best
                 possible price.
@@ -384,9 +384,9 @@ export default function HomePage() {
                 href={CAL_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-block rounded-full px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+                className="inline block rounded full px 6 py 3 text sm font semibold text white hover:shadow lg transition all"
                 style={{
-                  backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                  backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                 }}
               >
                 Get a home valuation
@@ -397,47 +397,47 @@ export default function HomePage() {
       </section>
 
       {/* INVESTORS */}
-      <section id="investors" className="py-20 bg-white">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">For Investors</p>
-            <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+      <section id="investors" className="py 20 bg white">
+        <div className="mx auto max w 6xl px 6">
+          <div className="text center mb 12">
+            <p className="text sm uppercase tracking widest text gray 500 mb 3">For Investors</p>
+            <h2 className="text 3xl font semibold text gray 900 mb 4">
               Build your portfolio with{" "}
               <span
-                className="bg-clip-text text-transparent"
+                className="bg clip text text transparent"
                 style={{
-                  backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                  backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                 }}
               >
                 clarity and speed
               </span>
             </h2>
-            <p className="text-gray-700 max-w-2xl mx-auto">
-              Whether you’re buying your first rental or scaling a multi-property portfolio, I help
+            <p className="text gray 700 max w 2xl mx auto">
+              Whether you’re buying your first rental or scaling a multi property portfolio, I help
               investors move quickly on deals that make financial sense.
             </p>
-            <p className="mt-3 text-sm text-gray-600 max-w-2xl mx-auto">
+            <p className="mt 3 text sm text gray 600 max w 2xl mx auto">
               We’ll quickly sort opportunities into: “pursue,” “negotiate,” or “pass” — with clear
               numbers behind it.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            <InvestorCard n="1" title="Buy-box clarity" body="Define criteria, target markets, and goals so we only review properties that fit." />
-            <InvestorCard n="2" title="Deal triage" body="Fast analysis with rent comps, repair ranges, and cash-flow projections." />
+          <div className="grid gap 6 md:grid cols 3">
+            <InvestorCard n="1" title="Buy box clarity" body="Define criteria, target markets, and goals so we only review properties that fit." />
+            <InvestorCard n="2" title="Deal triage" body="Fast analysis with rent comps, repair ranges, and cash flow projections." />
             <InvestorCard n="3" title="Closing support" body="Coordinate lenders, inspectors, and contractors to keep deals moving." />
           </div>
 
-          <div className="mt-12 rounded-3xl bg-gradient-to-br from-gray-50 to-gray-100 p-8 border border-gray-200 text-center">
-            <p className="text-lg font-semibold text-gray-900 mb-2">Ready to find your next investment?</p>
-            <p className="text-gray-600 mb-6">Let’s discuss your portfolio goals and market opportunities.</p>
+          <div className="mt 12 rounded 3xl bg gradient to br from gray 50 to gray 100 p 8 border border gray 200 text center">
+            <p className="text lg font semibold text gray 900 mb 2">Ready to find your next investment?</p>
+            <p className="text gray 600 mb 6">Let’s discuss your portfolio goals and market opportunities.</p>
             <a
               href={CAL_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-block rounded-full px-6 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all"
+              className="inline block rounded full px 6 py 3 text sm font semibold text white hover:shadow lg transition all"
               style={{
-                backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
               }}
             >
               Schedule investor consultation
@@ -447,27 +447,27 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#fafaf8] border-t border-gray-200 py-12">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
+      <footer className="bg [#fafaf8] border t border gray 200 py 12">
+        <div className="mx auto max w 6xl px 6">
+          <div className="flex flex wrap items center justify between gap 4">
+            <div className="flex items center gap 3">
               <div
-                className="h-10 w-10 rounded-2xl shadow-lg"
+                className="h 10 w 10 rounded 2xl shadow lg"
                 style={{
-                  backgroundImage: `linear-gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+                  backgroundImage: `linear gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
                 }}
               />
               <div>
-                <p className="text-sm font-semibold text-gray-900">{SITE_NAME}</p>
-                <p className="text-xs text-gray-500">© {new Date().getFullYear()} All rights reserved</p>
+                <p className="text sm font semibold text gray 900">{SITE_NAME}</p>
+                <p className="text xs text gray 500">© {new Date().getFullYear()} All rights reserved</p>
               </div>
             </div>
-            <div className="flex gap-6 text-sm">
-              <a className="text-gray-600 hover:text-gray-900 transition" href="/privacy">
+            <div className="flex gap 6 text sm">
+              <a className="text gray 600 hover:text gray 900 transition" href="/privacy">
                 Privacy
               </a>
               <a
-                className="text-gray-600 hover:text-gray-900 transition"
+                className="text gray 600 hover:text gray 900 transition"
                 href={ZILLOW_URL}
                 target="_blank"
                 rel="noreferrer"
@@ -475,7 +475,7 @@ export default function HomePage() {
                 Zillow Reviews
               </a>
               <a
-                className="text-gray-600 hover:text-gray-900 transition"
+                className="text gray 600 hover:text gray 900 transition"
                 href={CAL_URL}
                 target="_blank"
                 rel="noreferrer"
@@ -492,9 +492,9 @@ export default function HomePage() {
 
       {/* Toast */}
       {toast && (
-        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gray-900 px-5 py-3 text-sm text-white shadow-lg">
+        <div className="fixed bottom 6 left 1/2 z 50  translate x 1/2 rounded full bg gray 900 px 5 py 3 text sm text white shadow lg">
           {toast}
-          <button className="ml-3 text-white/70 hover:text-white" onClick={() => setToast(null)}>
+          <button className="ml 3 text white/70 hover:text white" onClick={() => setToast(null)}>
             ×
           </button>
         </div>
@@ -507,15 +507,15 @@ function InfoCard({ title, body, anchor }: { title: string; body: string; anchor
   return (
     <a
       href={`#${anchor}`}
-      className="rounded-3xl border border-gray-200 bg-white/90 p-6 hover:shadow-lg transition backdrop-blur"
+      className="rounded 3xl border border gray 200 bg white/90 p 6 hover:shadow lg transition backdrop blur"
     >
-      <p className="text-sm uppercase tracking-widest text-gray-500">The Lodge</p>
-      <h3 className="mt-2 text-xl font-semibold text-gray-900">{title}</h3>
-      <p className="mt-2 text-gray-600">{body}</p>
+      <p className="text sm uppercase tracking widest text gray 500">The Lodge</p>
+      <h3 className="mt 2 text xl font semibold text gray 900">{title}</h3>
+      <p className="mt 2 text gray 600">{body}</p>
       <p
-        className="mt-4 text-sm font-semibold bg-clip-text text-transparent"
+        className="mt 4 text sm font semibold bg clip text text transparent"
         style={{
-          backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+          backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
         }}
       >
         Explore →
@@ -526,18 +526,18 @@ function InfoCard({ title, body, anchor }: { title: string; body: string; anchor
 
 function FeatureLine({ title, body }: { title: string; body: string }) {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap 3">
       <div
-        className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-semibold"
+        className="flex shrink 0 w 6 h 6 rounded full flex items center justify center text white text sm font semibold"
         style={{
-          backgroundImage: `linear-gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+          backgroundImage: `linear gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
         }}
       >
         ✓
       </div>
       <div>
-        <p className="font-semibold text-gray-900">{title}</p>
-        <p className="text-sm text-gray-600">{body}</p>
+        <p className="font semibold text gray 900">{title}</p>
+        <p className="text sm text gray 600">{body}</p>
       </div>
     </div>
   );
@@ -546,27 +546,27 @@ function FeatureLine({ title, body }: { title: string; body: string }) {
 function StepLine({ n, title, body }: { n: string; title: string; body: string }) {
   return (
     <div>
-      <p className="text-lg font-semibold text-gray-900 mb-2">
+      <p className="text lg font semibold text gray 900 mb 2">
         {n}. {title}
       </p>
-      <p className="text-sm text-gray-600">{body}</p>
+      <p className="text sm text gray 600">{body}</p>
     </div>
   );
 }
 
 function InvestorCard({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 hover:shadow-lg transition">
+    <div className="rounded 3xl border border gray 200 bg white p 6 hover:shadow lg transition">
       <div
-        className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-white font-semibold"
+        className="w 12 h 12 rounded 2xl flex items center justify center mb 4 text white font semibold"
         style={{
-          backgroundImage: `linear-gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+          backgroundImage: `linear gradient(135deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
         }}
       >
         {n}
       </div>
-      <h3 className="text-xl font-semibold text-gray-900 mb-3">{title}</h3>
-      <p className="text-gray-600 text-sm">{body}</p>
+      <h3 className="text xl font semibold text gray 900 mb 3">{title}</h3>
+      <p className="text gray 600 text sm">{body}</p>
     </div>
   );
 }
@@ -619,10 +619,10 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-4 grid gap-3">
-      <div className="grid gap-3 md:grid-cols-2">
+    <form onSubmit={onSubmit} className="mt 4 grid gap 3">
+      <div className="grid gap 3 md:grid cols 2">
         <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           value={form.county}
           onChange={(e) => setForm({ ...form, county: e.target.value })}
@@ -635,7 +635,7 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
         </select>
 
         <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           placeholder="Towns (optional)"
           value={form.towns}
@@ -643,9 +643,9 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
         />
       </div>
 
-      <div className="grid gap-3 md:grid-cols-4">
+      <div className="grid gap 3 md:grid cols 4">
         <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           placeholder="Min $"
           inputMode="numeric"
@@ -653,7 +653,7 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
           onChange={(e) => setForm({ ...form, price_min: e.target.value })}
         />
         <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           placeholder="Max $"
           inputMode="numeric"
@@ -661,7 +661,7 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
           onChange={(e) => setForm({ ...form, price_max: e.target.value })}
         />
         <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           value={form.beds}
           onChange={(e) => setForm({ ...form, beds: e.target.value })}
@@ -673,7 +673,7 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
           <option value="5">5+ Beds</option>
         </select>
         <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           value={form.baths}
           onChange={(e) => setForm({ ...form, baths: e.target.value })}
@@ -685,23 +685,23 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
         </select>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="grid gap 3 md:grid cols 3">
         <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           value={form.property_type}
           onChange={(e) => setForm({ ...form, property_type: e.target.value })}
         >
           <option>Any</option>
-          <option>Single-family</option>
+          <option>Single family</option>
           <option>Condo</option>
-          <option>Multi-family</option>
+          <option>Multi family</option>
           <option>Townhouse</option>
           <option>Land</option>
         </select>
 
         <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           value={form.timeline}
           onChange={(e) => setForm({ ...form, timeline: e.target.value })}
@@ -713,28 +713,28 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
         </select>
 
         <select
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           value={form.financing}
           onChange={(e) => setForm({ ...form, financing: e.target.value })}
         >
           <option>Not sure</option>
-          <option>Pre-approved</option>
+          <option>Pre approved</option>
           <option>Need a lender</option>
           <option>Cash</option>
         </select>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="grid gap 3 md:grid cols 3">
         <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           placeholder="Name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
         <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           placeholder="Email"
           type="email"
@@ -742,7 +742,7 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
         <input
-          className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+          className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
           style={{ outlineColor: GOLD_FROM }}
           placeholder="Phone"
           type="tel"
@@ -753,21 +753,21 @@ function SearchCapture({ onSuccess }: { onSuccess: () => void }) {
 
       <input
         className="hidden"
-        tabIndex={-1}
+        tabIndex={ 1}
         autoComplete="off"
         value={form.company}
         onChange={(e) => setForm({ ...form, company: e.target.value })}
-        aria-hidden="true"
+        aria hidden="true"
       />
 
-      {err && <p className="text-sm text-red-600">{err}</p>}
+      {err && <p className="text sm text red 600">{err}</p>}
 
       <button
         disabled={loading}
         type="submit"
-        className="mt-1 rounded-2xl px-5 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all disabled:opacity-60"
+        className="mt 1 rounded 2xl px 5 py 3 text sm font semibold text white hover:shadow lg transition all disabled:opacity 60"
         style={{
-          backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+          backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
         }}
       >
         {loading ? "Sending…" : "See Matches (I’ll send listings)"}
@@ -811,38 +811,38 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
   }
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl">
-        <div className="flex items-start justify-between gap-4">
+    <div className="fixed inset 0 z 50 grid place items center bg black/50 p 4 backdrop blur sm">
+      <div className="w full max w lg rounded 3xl border border gray 200 bg white p 6 shadow 2xl">
+        <div className="flex items start justify between gap 4">
           <div>
-            <p className="text-sm uppercase tracking-widest text-gray-500">The Lodge</p>
-            <h2 className="mt-1 text-2xl font-semibold text-gray-900">Need help with real estate?</h2>
-            <p className="mt-2 text-gray-600">
+            <p className="text sm uppercase tracking widest text gray 500">The Lodge</p>
+            <h2 className="mt 1 text 2xl font semibold text gray 900">Need help with real estate?</h2>
+            <p className="mt 2 text gray 600">
               Drop your contact info and pick a time — I’ll help you get clear, fast.
             </p>
           </div>
 
           <button
-            className="rounded-full bg-gray-100 px-3 py-2 text-sm hover:bg-gray-200 transition"
+            className="rounded full bg gray 100 px 3 py 2 text sm hover:bg gray 200 transition"
             onClick={onClose}
-            aria-label="Close"
+            aria label="Close"
             type="button"
           >
             ✕
           </button>
         </div>
 
-        <form className="mt-5" onSubmit={onSubmit}>
-          <div className="grid gap-3 md:grid-cols-2">
+        <form className="mt 5" onSubmit={onSubmit}>
+          <div className="grid gap 3 md:grid cols 2">
             <input
-              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+              className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
               style={{ outlineColor: GOLD_FROM }}
               placeholder="Name"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
             <select
-              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1"
+              className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 focus:outline none focus:ring 1"
               style={{ outlineColor: GOLD_FROM }}
               value={form.lead_type}
               onChange={(e) => setForm({ ...form, lead_type: e.target.value })}
@@ -853,9 +853,9 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
             </select>
           </div>
 
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
+          <div className="mt 3 grid gap 3 md:grid cols 2">
             <input
-              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+              className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
               style={{ outlineColor: GOLD_FROM }}
               placeholder="Email"
               type="email"
@@ -863,7 +863,7 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
             <input
-              className="rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+              className="rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
               style={{ outlineColor: GOLD_FROM }}
               placeholder="Phone"
               type="tel"
@@ -873,7 +873,7 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
           </div>
 
           <textarea
-            className="mt-3 min-h-[90px] w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1"
+            className="mt 3 min h [90px] w full rounded 2xl border border gray 200 bg white px 4 py 3 text sm text gray 900 placeholder:text gray 400 focus:outline none focus:ring 1"
             style={{ outlineColor: GOLD_FROM }}
             placeholder="What are you looking for? (towns, budget, timeline)"
             value={form.message}
@@ -882,29 +882,29 @@ function LeadModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
 
           <input
             className="hidden"
-            tabIndex={-1}
+            tabIndex={ 1}
             autoComplete="off"
             value={form.company}
             onChange={(e) => setForm({ ...form, company: e.target.value })}
-            aria-hidden="true"
+            aria hidden="true"
           />
 
-          {err && <p className="mt-3 text-sm text-red-500">{err}</p>}
+          {err && <p className="mt 3 text sm text red 500">{err}</p>}
 
           <button
             disabled={loading}
             type="submit"
-            className="mt-4 w-full rounded-2xl px-5 py-3 text-sm font-semibold text-white hover:shadow-lg transition-all disabled:opacity-60"
+            className="mt 4 w full rounded 2xl px 5 py 3 text sm font semibold text white hover:shadow lg transition all disabled:opacity 60"
             style={{
-              backgroundImage: `linear-gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
+              backgroundImage: `linear gradient(90deg, ${GOLD_FROM}, ${GOLD_MID}, ${GOLD_TO})`,
             }}
           >
             {loading ? "Saving…" : "Save + Choose a time"}
           </button>
 
-          <p className="mt-3 text-xs text-gray-500 text-center">
+          <p className="mt 3 text xs text gray 500 text center">
             By submitting, you agree to be contacted about your request.{" "}
-            <a className="underline hover:text-gray-900" href="/privacy">
+            <a className="underline hover:text gray 900" href="/privacy">
               Privacy Policy
             </a>
             .
