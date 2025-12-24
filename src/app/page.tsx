@@ -71,7 +71,7 @@ export default function HomePage() {
     []
   );
 
-  const heroBg = "/maxim-shklyaev-tFSirJIjl34-unsplash.jpg";
+  const heroBg = "/yevhen-stienin-OFHWn0hFbiI-unsplash.jpg";
 
   return (
     <main className="min-h-screen bg-[#fafaf8] text-gray-900">
